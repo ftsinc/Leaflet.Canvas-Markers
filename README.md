@@ -1,6 +1,12 @@
 # Leaflet.Canvas-Markers
 Leaflet plugin for displaying markers on canvas instead of DOM. Working with Leaflet 1.0.0 and above.
-Feel free to contribute
+Feel free to contribute.
+
+This fork contains a fix for zoom animations, which came from a branch of Oleg Podchashynskyi's (corg) fork
+https://github.com/corg/Leaflet.Canvas-Markers
+In addition, it adds a setEnforceZIndex() function that can be used to support maintaining the marker zIndexOffset
+during rendering.
+As the markers returned by the Rbush search results were not being sorted by zIndexOffset.
 
 ## Demo
 
@@ -25,6 +31,9 @@ var marker =  L.marker([58.5578, 29.0087], {icon: icon});
 
 // Adding marker to layer
 ciLayer.addMarker(marker);
+
+// Ensure zIndexOffset is respected during rendering.
+ciLayer.setEnforceZIndex(true);
 ```
 
 ## Benchmark
@@ -70,6 +79,7 @@ You can also use L.circleMarker for your points with similar performance, but th
 - **redraw()**: Redraws the layer
 - **addOnClickListener(eventHandler)**: Adds common click listener for all markers
 - **addOnHoverListener(eventHandler)**: Adds a hover over listener for all markers
+- **setEnforceZIndex(enforce)**: Markers will be rendered maintaining their zIndexOffset ordering.
 
 I also implemented binds for default **addLayer**, **addLayers** and **removeLayer** (equal to removeMarker(marker, _true_) methods.
 

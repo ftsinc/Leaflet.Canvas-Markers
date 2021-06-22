@@ -1,17 +1,18 @@
 {
-  "name": "leaflet-canvas-marker",
-  "version": "0.2.3",
+  "name": "@ftsinc/leaflet-canvas-marker",
+  "version": "0.2.31",
   "description": "Leaflet plugin to display markers on canvas instead of DOM",
   "main": "dist/leaflet.canvas-markers.js",
   "directories": {
-    "example": "examples",
-    "lib": "dist"
+    "example": "examples"
   },
   "scripts": {
     "build:test": "set NODE_ENV=test&& webpack",
     "build": "set NODE_ENV=prod&& webpack",
+    "clean": "rm -rf dist",
     "watch": "set NODE_ENV=test&& webpack --watch",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "postversion": "git push"
   },
   "keywords": [
     "leaflet",
@@ -23,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eJuke/Leaflet.Canvas-Markers.git"
+    "url": "git+https://github.com/ftsinc/Leaflet.Canvas-Markers.git"
   },
   "devDependencies": {
     "script-loader": "^0.7.2",
@@ -36,5 +37,9 @@
   },
   "dependencies": {
     "rbush": "^2.0.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/ftsinc/Leaflet.Canvas-Markers/issues"
+  },
+  "homepage": "https://github.com/ftsinc/Leaflet.Canvas-Markers#readme"
 }

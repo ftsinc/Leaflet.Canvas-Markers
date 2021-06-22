@@ -10,12 +10,17 @@ function layerFactory(L) {
             L.setOptions(this, options);
             this._onClickListeners = [];
             this._onHoverListeners = [];
+            this._enforceZIndex = false;
         },
 
         setOptions: function (options) {
 
             L.setOptions(this, options);
             return this.redraw();
+        },
+
+        setEnforceZIndex: function (enforce) {
+            this._enforceZIndex = enforce;
         },
 
         redraw: function () {
@@ -331,6 +336,7 @@ function layerFactory(L) {
                 maxY: mapBounds.getNorth(),
             };
 
+            var markersToDraw = [];
             self._latlngMarkers.search(mapBoxCoords).forEach(function (e) {
 
                 //Readjust Point Map
@@ -349,10 +355,17 @@ function layerFactory(L) {
                 }
 
                 tmp.push(newCoords);
-
-                //Redraw points
-                self._drawMarker(e.data, pointPos);
+                markersToDraw.push({e, pointPos});
             });
+
+            // Enforce zIndexOffset when drawing points.
+            if (this._enforceZIndex) {
+                markersToDraw.sort((a, b) => a.e.data.options.zIndexOffset - b.e.data.options.zIndexOffset);
+            }
+            //Redraw points
+            markersToDraw.forEach(object => {
+                self._drawMarker(object.e.data, object.pointPos)
+            })
 
             //Clear rBush & Bulk Load for performance
             this._markers.clear();
