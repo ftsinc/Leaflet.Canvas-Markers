@@ -35,6 +35,11 @@ function layerFactory(L) {
             var tmpMark = [];
             var tmpLatLng = [];
 
+            // Enforce zIndexOffset when drawing points.
+            if (this._enforceZIndex) {
+                markers.sort((a, b) => a.options.zIndexOffset - b.options.zIndexOffset);
+            }
+
             markers.forEach(function (marker) {
 
                 if (!((marker.options.pane == 'markerPane') && marker.options.icon))
@@ -57,7 +62,8 @@ function layerFactory(L) {
             self._latlngMarkers.load(tmpLatLng);
         },
 
-        //Adds single layer at a time. Less efficient for rBush
+        //Adds single layer at a time. Less efficient for rBush,
+        //Note: This doesn't respect the marker's zIndexOffset and instead will be rendered in the order it is added.
         addMarker: function (marker) {
 
             var self = this;
