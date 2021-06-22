@@ -30,18 +30,14 @@ function layerFactory(L) {
 
         //Multiple layers at a time for rBush performance
         addMarkers: function (markers) {
-            console.log(`[addMarkers] markers count: ${markers.length}`);
             var self = this;
             var tmpMark = [];
             var tmpLatLng = [];
 
             // Enforce zIndexOffset when drawing points.
             if (this._enforceZIndex) {
-                console.log(`[addMarkers] markers _enforceZIndex`);
                 markers.sort((a, b) => {
-                    console.log(`[addMarkers] a.options: ${a.options}`);
-                    console.log(`[addMarkers] b.options: ${b.options}`);
-                    return a.options.zIndexOffset - b.options.zIndexOffset
+                    return a.options.zIndexOffset - b.options.zIndexOffset;
                 });
             }
 
@@ -313,7 +309,6 @@ function layerFactory(L) {
         },
 
         _redraw: function (clear) {
-            console.log(`[_redraw] clear: ${clear}`);
             var self = this;
 
             if (clear) this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
@@ -371,11 +366,8 @@ function layerFactory(L) {
 
             // Enforce zIndexOffset when drawing points.
             if (this._enforceZIndex) {
-                console.log(`[_redraw] _enforceZIndex: ${this._enforceZIndex}`);
                 markersToDraw.sort((a, b) => {
-                    console.log(`[_redraw] a.e.data.options: ${a.e.data.options}`);
-                    console.log(`[_redraw] b.e.data.options: ${b.e.data.options}`);
-                    return a.e.data.options.zIndexOffset - b.e.data.options.zIndexOffset
+                    return a.e.data.options.zIndexOffset - b.e.data.options.zIndexOffset;
                 });
             }
             //Redraw points
