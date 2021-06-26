@@ -80,6 +80,9 @@ You can also use L.circleMarker for your points with similar performance, but th
 - **addOnClickListener(eventHandler)**: Adds common click listener for all markers
 - **addOnHoverListener(eventHandler)**: Adds a hover over listener for all markers
 - **setEnforceZIndex(enforce)**: Markers will be rendered maintaining their zIndexOffset ordering.
+- **initializeCanvas**: Sets the size and position of the canvas. Required to ensure all markers are rendered at
+ the correct location if the map will be immediately moved/zoomed programmatically, or is manually moved before the
+ first canvas redraw() occurs.
 
 I also implemented binds for default **addLayer**, **addLayers** and **removeLayer** (equal to removeMarker(marker, _true_) methods.
 

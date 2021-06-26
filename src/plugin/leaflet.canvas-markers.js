@@ -13,6 +13,16 @@ function layerFactory(L) {
             this._enforceZIndex = false;
         },
 
+        initializeCanvas: function () {
+            var topLeft = this._map.containerPointToLayerPoint([0, 0]);
+            L.DomUtil.setPosition(this._canvas, topLeft);
+
+            var size = this._map.getSize();
+
+            this._canvas.width = size.x;
+            this._canvas.height = size.y;
+        }
+
         setOptions: function (options) {
 
             L.setOptions(this, options);
@@ -297,13 +307,7 @@ function layerFactory(L) {
 
         _reset: function () {
 
-            var topLeft = this._map.containerPointToLayerPoint([0, 0]);
-            L.DomUtil.setPosition(this._canvas, topLeft);
-
-            var size = this._map.getSize();
-
-            this._canvas.width = size.x;
-            this._canvas.height = size.y;
+            this.initializeCanvas();
 
             this._redraw();
         },
