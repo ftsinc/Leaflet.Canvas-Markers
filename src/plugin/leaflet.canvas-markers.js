@@ -21,7 +21,7 @@ function layerFactory(L) {
 
             this._canvas.width = size.x;
             this._canvas.height = size.y;
-        }
+        },
 
         setOptions: function (options) {
 
